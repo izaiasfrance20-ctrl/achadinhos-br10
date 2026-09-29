@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Achadinhos BR10</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f5f5;font-family:Arial,sans-serif}.top{background:#fff;padding:22px;text-align:center;border-bottom:1px solid #ddd;position:sticky;top:0;z-index:2}.top h1{margin:0;font-size:25px}.top p{margin:5px 0 0;color:#777;font-size:13px}.grid{max-width:760px;margin:auto;padding:16px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{background:#fff;border-radius:13px;overflow:hidden;box-shadow:0 2px 9px #00000012}.card a{display:block}.card img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}.empty{text-align:center;color:#777;padding:50px 15px}@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
+</style></head><body><header class="top"><h1>Achadinhos BR10</h1><p>Confira nossos achadinhos</p></header><main id="grid" class="grid"></main>
+<script>
+async function load(){const r=await fetch('/api/products');const ps=await r.json();const g=document.querySelector('#grid');
+if(!ps.length){g.innerHTML='<div class="empty">Nenhum produto disponível no momento.</div>';return}
+g.innerHTML=ps.map(p=>`<article class="card"><a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer"><img src="${esc(p.photo)}" alt="Produto"></a></article>`).join('')}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}load();
+</script></body></html>
